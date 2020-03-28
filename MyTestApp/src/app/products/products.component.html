@@ -1,0 +1,152 @@
+<!-- Routing -->
+<div class="row mt-2">
+  <div class="col">
+    <h2 #productHeading>Products</h2>
+    <hr />
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let product of products; let i = index"
+        style="cursor: pointer;"
+      >
+        <h4 [ngStyle]="{ color: odd ? 'red' : 'green' }">
+          {{ product.name }}
+        </h4>
+        <p [ngClass]="{ 'text-warning': odd }">{{ product.description }}</p>
+        <div>
+          <button class="btn btn-primary m-2" (click)="navigateToDetails(i)">
+            View Details
+          </button>
+          <button class="btn btn-success m-2" (click)="navigateToEdit(i)">
+            Edit Product
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<!-- <ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item">
+    <a href="#basics" role="tab" data-toggle="tab" class="nav-link active">
+      Basics
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="#products" role="tab" data-toggle="tab" class="nav-link">
+      Products
+    </a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="basics">
+    <div>
+      <h2 textHighlight>Products Components Initiated</h2>
+
+      <p *myLoop5>String Interpolation</p>
+      <p
+        [ngStyle]="{ 'background-color': getBackgroundColor() }"
+        [ngClass]="{
+          'text-white': productStatus,
+          'text-yellow': productStatus == false
+        }"
+      >
+        Product with id {{ productId }} and {{ productName }} is available..
+      </p>
+
+      <p [textContent]="'Product Name is : ' + productName"></p>
+
+      <p product-text-color [innerHTML]="'Text'"></p>
+
+      <button type="button" class="btn btn-primary" (click)="addProduct()">
+        Add Product
+      </button>
+
+      <input
+        type="text"
+        class="col-sm-5 form-control"
+        [(ngModel)]="sampleText"
+      />
+    </div>
+
+    <p *ngIf="productStatus; else elseProductStatus">
+      Product status : {{ productStatus }}
+    </p>
+    <ng-template #elseProductStatus>
+      <p>Product status is false</p>
+    </ng-template>
+
+    <div>
+      <p>Sample Text is here : {{ sampleText }}</p>
+    </div>
+
+    <div>
+      <h4>Product names are :</h4>
+
+      <p *ngFor="let name of productsNames">
+        {{ name }}
+      </p>
+    </div>
+    <app-product></app-product>
+    <app-product></app-product>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="products">
+    <div class="mt-2">
+      <div class="col-sm-8">
+        <h2 #productHeading>Products</h2>
+        <hr />
+        <ul class="list-group">
+          <li
+            class="list-group-item"
+            *ngFor="
+              let product of products;
+              let i = index;
+              let odd = odd;
+              let even = even
+            "
+          >
+            <span>{{ "index " + i }}</span>
+            <span>{{ "Odd " + odd }}</span>
+            <span>{{ "Even " + even }}</span>
+            <h4 [ngStyle]="{ color: odd ? 'red' : 'green' }">
+              {{ product.name }}
+            </h4>
+            <p [ngClass]="{ 'text-warning': odd }">{{ product.description }}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+ 
+<div class="mt-2">
+  <div class="col-sm-8">
+    <h2 #productHeading>Products</h2>
+    <hr />
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="
+          let product of products;
+          let i = index;
+          let odd = odd;
+          let even = even
+        "
+      >
+        <span>{{ "index " + i }}</span>
+        <span>{{ "Odd " + odd }}</span>
+        <span>{{ "Even " + even }}</span>
+        <h4 [ngStyle]="{ color: odd ? 'red' : 'green' }">
+          {{ product.name }}
+        </h4>
+        <p [ngClass]="{ 'text-warning': odd }">{{ product.description }}</p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+</div> -->

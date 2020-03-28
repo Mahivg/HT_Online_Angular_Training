@@ -1,0 +1,10 @@
+.recipe-card {
+  margin: 5px;
+  padding: 5px;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+}
+
+.recipe-img {
+  max-height: 100px;
+}

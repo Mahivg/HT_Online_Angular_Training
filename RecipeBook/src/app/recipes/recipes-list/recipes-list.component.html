@@ -1,0 +1,8 @@
+<h2>Recipies</h2>
+<hr />
+<div class="card recipe-card" *ngFor="let recipe of recipes; let i = index">
+  <app-recipe-item
+    [recipe]="recipe"
+    (click)="recipeWasSelected(i)"
+  ></app-recipe-item>
+</div>

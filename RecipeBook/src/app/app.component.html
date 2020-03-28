@@ -1,0 +1,9 @@
+<app-header (onMenuSelected)="menuChanged($event)"></app-header>
+
+<div class="container">
+  <!-- <h1>App component works !!</h1> -->
+  <div>
+    <app-recipes *ngIf="menu !== 'shopping'"></app-recipes>
+    <app-shopping-list *ngIf="menu === 'shopping'"></app-shopping-list>
+  </div>
+</div>

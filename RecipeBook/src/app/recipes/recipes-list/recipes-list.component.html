@@ -1,8 +1,15 @@
-<h2>Recipies</h2>
-<hr />
-<div class="card recipe-card" *ngFor="let recipe of recipes; let i = index">
-  <app-recipe-item
-    [recipe]="recipe"
-    (click)="recipeWasSelected(i)"
-  ></app-recipe-item>
+<div class="row">
+  <div class="col-6">
+    <h2>Recipies</h2>
+    <hr />
+    <div class="card recipe-card" *ngFor="let recipe of recipes; let i = index">
+      <app-recipe-item
+        [recipe]="recipe"
+        (click)="recipeWasSelected(i)"
+      ></app-recipe-item>
+    </div>
+  </div>
+  <div class="col-6">
+    <router-outlet></router-outlet>
+  </div>
 </div>

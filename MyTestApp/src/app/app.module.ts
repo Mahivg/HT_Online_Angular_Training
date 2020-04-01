@@ -16,30 +16,11 @@ import { MyLoopDirective } from "./shared/custom-directive/my-loop.directive";
 import { LoggingService } from "./shared/service/logging.service";
 import { Routes, RouterModule } from "@angular/router";
 import { NotFoundComponent } from "./not-found/not-found.component";
+import { LoginComponent } from "./login/login.component";
+import { ProductGaurd } from "./products/products-gaurd.service";
+import { ProductExitGaurd } from "./products/products-exit-gaurd.service";
 
-const appRoutes: Routes = [
-  {
-    path: "products",
-    component: ProductsComponent,
-    children: [
-      { path: ":id/details", component: ProductComponent },
-      { path: ":id/edit", component: ProductEditComponent }
-    ]
-  },
-  {
-    path: "",
-    redirectTo: "products",
-    pathMatch: "full"
-  },
-  {
-    path: "something",
-    component: NotFoundComponent
-  },
-  {
-    path: "**",
-    component: NotFoundComponent
-  }
-];
+// const appRoutes: Routes =
 
 @NgModule({
   declarations: [
@@ -51,10 +32,11 @@ const appRoutes: Routes = [
     TestComponent,
     TextHighlightDirective,
     MyLoopDirective,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent
   ],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(appRoutes)],
-  providers: [],
+  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  providers: [ProductGaurd, ProductExitGaurd],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -17,6 +17,7 @@ import {
 import { LoggingService } from "../shared/service/logging.service";
 import { ProductsService } from "./products.service";
 import { Router, ActivatedRoute } from "@angular/router";
+import { IProductExitGaurd } from "./products-exit-gaurd.service";
 
 @Component({
   selector: "app-products",
@@ -42,7 +43,8 @@ export class ProductsComponent
     AfterContentChecked,
     AfterViewInit,
     AfterViewChecked,
-    OnDestroy {
+    OnDestroy,
+    IProductExitGaurd {
   productId: number = 10;
 
   newProductName: string;
@@ -74,6 +76,8 @@ export class ProductsComponent
   getProductName() {
     return this.productName;
   }
+
+  onRouteExit() {}
 
   addProduct() {
     // this.sampleText = "Updated";

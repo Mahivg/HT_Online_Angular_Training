@@ -18,6 +18,13 @@ import { LoggingService } from "../shared/service/logging.service";
 import { ProductsService } from "./products.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { IProductExitGaurd } from "./products-exit-gaurd.service";
+import {
+  interval,
+  Observable,
+  throwError,
+  Subscriber,
+  Subscription
+} from "rxjs";
 
 @Component({
   selector: "app-products",
@@ -67,6 +74,10 @@ export class ProductsComponent
 
   sampleText: string = "";
 
+  observ: any;
+
+  subscription: Subscription;
+
   constructor(
     private productService: ProductsService,
     private router: Router,
@@ -110,6 +121,34 @@ export class ProductsComponent
     this.productService.onProductAdd.subscribe(data => {
       this.products.push(data);
     });
+
+    // interval(2000).subscribe(data => {
+    //   console.log(data);
+    // }, err => {}, () => {});
+
+    this.subscription = new Observable(observer => {
+      let count = 0;
+      setInterval(() => {
+        if (count == 3) {
+          observer.error("Count reached 4");
+        }
+        if (count == 4) {
+          observer.complete();
+        }
+        observer.next(count);
+        count++;
+      }, 1000);
+    }).subscribe(
+      data => {
+        console.log(data);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        console.log("The job is done");
+      }
+    );
   }
 
   ngDoCheck() {
@@ -134,6 +173,7 @@ export class ProductsComponent
 
   ngOnDestroy() {
     // console.log("Products ngOnDestroy : Called ");
+    this.subscription.unsubscribe();
   }
 
   navigateToDetails(index: number) {

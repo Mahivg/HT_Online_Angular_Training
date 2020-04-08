@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ProductsComponent } from "./products/products.component";
 import { ProductComponent } from "./product/product.component";
 import { ProductTextColor } from "./products/product-text-color.directives";
@@ -35,7 +35,7 @@ import { ProductExitGaurd } from "./products/products-exit-gaurd.service";
     NotFoundComponent,
     LoginComponent
   ],
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, ReactiveFormsModule, AppRoutingModule],
   providers: [ProductGaurd, ProductExitGaurd],
   bootstrap: [AppComponent]
 })

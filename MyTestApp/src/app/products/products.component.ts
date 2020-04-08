@@ -26,6 +26,8 @@ import {
   Subscription
 } from "rxjs";
 
+import { map, filter } from "rxjs/operators";
+
 @Component({
   selector: "app-products",
   templateUrl: "./products.component.html",
@@ -78,6 +80,8 @@ export class ProductsComponent
 
   subscription: Subscription;
 
+  productAddSubscription: Subscription;
+
   constructor(
     private productService: ProductsService,
     private router: Router,
@@ -118,37 +122,54 @@ export class ProductsComponent
     // console.log("ngOnInit : Called ");
     this.products = this.productService.getProducts();
 
-    this.productService.onProductAdd.subscribe(data => {
-      this.products.push(data);
-    });
-
-    // interval(2000).subscribe(data => {
-    //   console.log(data);
-    // }, err => {}, () => {});
-
-    this.subscription = new Observable(observer => {
-      let count = 0;
-      setInterval(() => {
-        if (count == 3) {
-          observer.error("Count reached 4");
-        }
-        if (count == 4) {
-          observer.complete();
-        }
-        observer.next(count);
-        count++;
-      }, 1000);
-    }).subscribe(
+    this.productAddSubscription = this.productService.onProductAdd.subscribe(
       data => {
-        console.log(data);
-      },
-      err => {
-        console.log(err);
-      },
-      () => {
-        console.log("The job is done");
+        this.products.push(data);
       }
     );
+
+    // Operators
+
+    this.subscription = interval(2000)
+      .pipe(
+        filter(data => {
+          return data % 2 === 0;
+        }),
+        map(data => {
+          return "count : " + data;
+        })
+      )
+      .subscribe(
+        data => {
+          //console.log(data);
+        },
+        err => {},
+        () => {}
+      );
+
+    // this.subscription = new Observable(observer => {
+    //   let count = 0;
+    //   setInterval(() => {
+    //     if (count == 3) {
+    //       observer.error("Count reached 4");
+    //     }
+    //     if (count == 4) {
+    //       observer.complete();
+    //     }
+    //     observer.next(count);
+    //     count++;
+    //   }, 1000);
+    // }).subscribe(
+    //   data => {
+    //     console.log(data);
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   },
+    //   () => {
+    //     console.log("The job is done");
+    //   }
+    // );
   }
 
   ngDoCheck() {
@@ -174,6 +195,7 @@ export class ProductsComponent
   ngOnDestroy() {
     // console.log("Products ngOnDestroy : Called ");
     this.subscription.unsubscribe();
+    this.productAddSubscription.unsubscribe();
   }
 
   navigateToDetails(index: number) {

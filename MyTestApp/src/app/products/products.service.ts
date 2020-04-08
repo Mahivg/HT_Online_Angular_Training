@@ -1,5 +1,6 @@
 import { LoggingService } from "../shared/service/logging.service";
 import { EventEmitter, Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -11,7 +12,7 @@ export class ProductsService {
     { name: "Product 3", description: "Test3 Description" }
   ];
 
-  onProductAdd = new EventEmitter<{
+  onProductAdd = new Subject<{
     name: string;
     description: string;
   }>();

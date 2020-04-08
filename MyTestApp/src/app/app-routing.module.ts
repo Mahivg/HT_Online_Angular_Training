@@ -23,9 +23,7 @@ const routes: Routes = [
         canDeactivate: [ProductExitGaurd]
       },
       { path: ":id/edit", component: ProductEditComponent }
-    ],
-    canDeactivate: [ProductExitGaurd],
-    canActivateChild: [ProductGaurd]
+    ]
   },
   {
     path: "",

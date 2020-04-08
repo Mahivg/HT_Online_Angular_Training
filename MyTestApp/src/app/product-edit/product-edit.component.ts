@@ -10,6 +10,7 @@ import {
 } from "@angular/core";
 import { ProductsService } from "../products/products.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { NgForm } from "@angular/forms";
 
 @Component({
   selector: "app-product-edit",
@@ -26,8 +27,14 @@ export class ProductEditComponent implements OnInit {
     description: string;
   }>();
 
-  @ViewChild("txtName", { static: true }) txtName: ElementRef;
-  @ViewChild("txtDesc", { static: true }) txtDesc: ElementRef;
+  name: string = "Hope";
+
+  desc: string = "test";
+
+  @ViewChild("txtName", { static: true }) txtName: any;
+  @ViewChild("txtDesc", { static: true }) txtDesc: any;
+
+  @ViewChild("form", { static: true }) form: NgForm;
 
   @ContentChild("txtLine", { static: true }) txtLine: ElementRef;
 
@@ -60,15 +67,19 @@ export class ProductEditComponent implements OnInit {
     // console.log(this.txtName);
     // console.log(this.txtDesc);
 
-    this.productService.onProductAdd.emit({
-      name: this.txtName.nativeElement.value,
-      description: this.txtName.nativeElement.value
-    });
+    // this.productService.onProductAdd.next({
+    //   name: this.txtName.nativeElement.value,
+    //   description: this.txtName.nativeElement.value
+    // });
 
     // this.onProductAdd.emit({
     //   name: this.newProductName,
     //   description: this.newProductDesc
     // });
+
+    console.log(this.form);
+    console.log(this.txtName);
+    console.log(this.txtDesc);
     this.newProductName = this.newProductDesc = "";
   }
 
@@ -77,5 +88,28 @@ export class ProductEditComponent implements OnInit {
       queryParams: { data: true },
       queryParamsHandling: "merge"
     });
+  }
+
+  setFormValue() {
+    this.form.setValue({
+      name: "Name",
+      description: "Description",
+      email: "test@com",
+      gender: "male"
+    });
+    // this.form.form.patchValue({
+    //   name: "Name",
+    //   description: "Description"
+    // });
+
+    console.log(this.form);
+  }
+
+  resetForm() {
+    this.form.reset();
+  }
+
+  onFormSubmit(result: any) {
+    console.log(result);
   }
 }

@@ -7,7 +7,7 @@
     />
   </div>
   <div class="col-sm-8">
-    <h4>{{ recipe.name }}</h4>
+    <h4>{{ recipe.name | uppercase | lowercase | customUpperCase }}</h4>
     <p>{{ recipe.description }}</p>
   </div>
 </div>

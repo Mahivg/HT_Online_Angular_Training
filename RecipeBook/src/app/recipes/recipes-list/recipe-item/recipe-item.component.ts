@@ -9,7 +9,11 @@ import { Recipe } from "src/app/model/recipe";
 export class RecipeItemComponent implements OnInit {
   @Input() recipe: Recipe;
 
+  mydate: Date;
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.mydate = new Date();
+  }
 }

@@ -1,19 +1,16 @@
 import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
+import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 import { RecipesComponent } from "./recipes/recipes.component";
 import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 
+// Lay Loading
+
 const routes: Routes = [
   {
     path: "recipes",
-    component: RecipesComponent,
-    children: [
-      {
-        path: ":id/details",
-        component: RecipeDetailComponent
-      }
-    ]
+    loadChildren: "./recipes/recipes.module#RecipeModule"
+    // loadChildren: () => import("./recipes/recipes.module").then(module => module.RecipeModule)
   },
   {
     path: "shopping",
@@ -28,7 +25,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: PreloadAllModules
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}

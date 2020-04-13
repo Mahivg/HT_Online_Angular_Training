@@ -33,5 +33,18 @@
       <button type="submit" class="btn btn-success m-2">Submit</button>
       <button type="button" class="btn btn-danger m-2">Reset</button>
     </div>
+
+    <div class="form-group">
+      <button
+        type="button"
+        (click)="postAnObject()"
+        class="btn btn-success m-2"
+      >
+        Post
+      </button>
+      <button type="button" class="btn btn-danger m-2" (click)="getAnObject()">
+        Get
+      </button>
+    </div>
   </form>
 </div>

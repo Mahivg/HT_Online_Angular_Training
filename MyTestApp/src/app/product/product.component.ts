@@ -6,6 +6,8 @@ import {
   Validators,
   FormBuilder
 } from "@angular/forms";
+import { HttpClient } from "@angular/common/http";
+import { ProductsService } from "../products/products.service";
 
 @Component({
   selector: "app-product",
@@ -13,7 +15,10 @@ import {
   styleUrls: ["./product.component.css"]
 })
 export class ProductComponent implements OnInit, IProductExitGaurd {
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductsService
+  ) {}
 
   myFormGroup: FormGroup;
 
@@ -34,6 +39,14 @@ export class ProductComponent implements OnInit, IProductExitGaurd {
 
   get f() {
     return this.myFormGroup.controls;
+  }
+
+  postAnObject() {
+    this.productService.postMyProducts().subscribe(res => console.log(res));
+  }
+
+  getAnObject() {
+    this.productService.getMyProducts().subscribe(res => console.log(res));
   }
 
   onFormSubmit() {

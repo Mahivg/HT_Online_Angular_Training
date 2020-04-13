@@ -1,6 +1,7 @@
 import { LoggingService } from "../shared/service/logging.service";
 import { EventEmitter, Injectable } from "@angular/core";
 import { Subject } from "rxjs";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
@@ -17,7 +18,14 @@ export class ProductsService {
     description: string;
   }>();
 
-  constructor(private loggingService: LoggingService) {}
+  httpHeaders = new HttpHeaders({
+    Authorization: "apiKey"
+  });
+
+  constructor(
+    private loggingService: LoggingService,
+    private httpClient: HttpClient
+  ) {}
 
   addProduct(product: any) {
     // Some action
@@ -26,5 +34,24 @@ export class ProductsService {
 
   getProducts() {
     return this.products;
+  }
+
+  postMyProducts() {
+    return this.httpClient.post(
+      "https://mytestapplication-f1239.firebaseio.com/mytestapplication-f1239.json",
+      {
+        name: "product1",
+        price: 100
+      },
+      {
+        params: new HttpParams().set("dataType", "value")
+      }
+    );
+  }
+
+  getMyProducts() {
+    return this.httpClient.get(
+      "https://mytestapplication-f1239.firebaseio.com/mytestapplication-f1239.json"
+    );
   }
 }

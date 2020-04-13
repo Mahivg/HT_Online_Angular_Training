@@ -110,6 +110,6 @@ export class ProductEditComponent implements OnInit {
   }
 
   onFormSubmit(result: any) {
-    console.log(result);
+    console.log(result.value);
   }
 }
